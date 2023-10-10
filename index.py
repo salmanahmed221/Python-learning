@@ -96,7 +96,7 @@ print(d.lstrip())
 print(d.rstrip())
 print(d.strip())
 
-# remove prefix
+# remove prefixs
 f: str = "http//localhost"
 print(f.removeprefix("http//"))
 
