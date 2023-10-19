@@ -1,7 +1,12 @@
 # variables
+name: str = "My name is 'salman"
+print(type(name))
+print(id(name))
+print(dir(name))
 a: int = 77
 b: str = "abc"
 c: bool = True
+de: str = "my name is \"salman's"
 
 # lists and its methods
 x: list[str] = ["a", "b", "c"]
@@ -111,3 +116,67 @@ A: str = "ali"
 magicians: list[str] = ["alice", "david", "carolina"]
 for mag in magicians:
     print(mag)
+
+# string methods format
+# 1
+af: int = 7
+bf: int = 8
+df: str = "pakistan value a = {} and value b = {}".format(af, bf)
+print(df)
+
+# 2
+name2: str = "Muhammad Qasim"
+fname2: str = "Muhammad Aslam"
+education2: str = "Master in Data Science"
+age2: int = 30
+
+
+card: str = """
+PIAIC Student Card
+Student Name : {}
+Father's Name: {}
+Age: {}
+Education : {}
+""".format(
+    fname2, name2, education2, age2
+)
+
+print(card)
+
+# 3
+name3: str = "Muhammad Qasim"
+fname3: str = "Muhammad Aslam"
+education3: str = "Master in Data Science"
+age3: int = 30
+
+
+card3: str = """
+PIAIC Student Card
+Student Name : {1}
+Father's Name: {0}
+Age: {3}
+Education : {2}
+""".format(
+    fname3, name3, education3, age3
+)
+#      0      1       2        3
+
+print(card3)
+
+# 4
+name4 : str = 'Muhammad Qasim'
+fname4 : str = "Muhammad Aslam"
+education4 : str = "Master in Data Science"
+age4 : int = 30
+
+
+card4 : str = """
+PIAIC Student Card
+Student Name : {a}
+Father's Name: {b}
+Age: {c}
+Education : {d}
+""".format(a=name4, b=fname4, c=age4, d=education4)
+
+
+print(card4)
