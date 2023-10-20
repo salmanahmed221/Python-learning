@@ -164,19 +164,111 @@ Education : {2}
 print(card3)
 
 # 4
-name4 : str = 'Muhammad Qasim'
-fname4 : str = "Muhammad Aslam"
-education4 : str = "Master in Data Science"
-age4 : int = 30
+name4: str = "Muhammad Qasim"
+fname4: str = "Muhammad Aslam"
+education4: str = "Master in Data Science"
+age4: int = 30
 
 
-card4 : str = """
+card4: str = """
 PIAIC Student Card
 Student Name : {a}
 Father's Name: {b}
 Age: {c}
 Education : {d}
-""".format(a=name4, b=fname4, c=age4, d=education4)
-
+""".format(
+    a=name4, b=fname4, c=age4, d=education4
+)
 
 print(card4)
+
+# Python Arithmetic Operators
+n: int = 7
+m: int = 2
+
+print(n + m)
+print(n - m)
+print(n * m)
+print(n / m)
+print(n % m)
+print(2**2)
+
+# ASCII Code
+
+# A = 65
+# B = 66
+# Z = 90
+
+# a = 97
+# b = 98
+# z = 122
+
+# 0=48
+# 1=49
+# 9=57
+
+print(chr(90))
+print(ord("C"))
+
+l: str = "A"
+o: str = "B"
+
+print(o >= l)
+
+# Python Logical Operators
+print(True and True and True and True)
+print(True and True and False and True)
+print(False and False and False and True)
+
+print(True or True or True or True)
+print(True or True or False or True)
+print(False or False or False or True)
+print(False or False or False or False)
+
+not True
+
+# Python Identity Operators
+v: str = "abc"
+z: str = "abc"
+
+print(id(v))
+print(id(z))
+print(v is z)
+print(v is not z)
+
+i: str = "abc"
+j: str = "xyz"
+
+print(id(i))
+print(id(j))
+print(i is j)
+print(i is not j)
+
+# Python Membership Operators
+names12: list[str] = ["Sir Zia", "Sir Inam", "Qasim"]
+uinput: str = input("Enter your name: ")
+print(uinput in names12)
+print(uinput not in names12)
+
+# PEMDAS
+print(3 + 2 - 2 * 4 / 2 + 2)
+
+# unzip
+i, g, p = "qasim", 7, 3.0
+print(i)
+print(g)
+print(p)
+
+aa, bd, ce = ("qasim", 7, 3.0)
+print(aa)
+print(bd)
+print(ce)
+
+data = ("qasim", 7, 3.0)
+print(data[0], data[1], data[2])
+
+data = ("qasim", 7, 3.0)
+print(data[0], data[1], data[2])
+print(*data)
+
+print("a" * 6)
