@@ -1,3 +1,5 @@
+from typing import Any
+
 # variables
 name: str = "My name is 'salman"
 print(type(name))
@@ -10,6 +12,9 @@ de: str = "my name is \"salman's"
 
 # lists and its methods
 x: list[str] = ["a", "b", "c"]
+names21: list[Any] = ["Qasim", "Sir Zia", "Sir Inam", 20, True]
+print(names21)
+
 x[0] = "f"
 # append used to push at the end
 x.append("e")
@@ -272,3 +277,10 @@ print(data[0], data[1], data[2])
 print(*data)
 
 print("a" * 6)
+
+# Help
+# help(object)
+# object?
+# object??
+# ?object
+# ??object  used for help in python but only works on build in function like print,len
