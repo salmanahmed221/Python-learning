@@ -284,3 +284,150 @@ print("a" * 6)
 # object??
 # ?object
 # ??object  used for help in python but only works on build in function like print,len
+
+# iteration on list with while loop
+kl: list[str] = ["a", "b", "c", "d"]
+pp: int = 0
+while pp < len(kl):
+    print(kl[pp])
+    pp += 1
+
+# loop syntax this is loop syntax after indentation include the body of loop
+names22: list[str] = ["Sir Zia", "Muhammad Qasim", "DR Noman"]
+# 1
+for i in names22:
+    print(f"Welcome dear teacher {i.upper()}")
+    print("PIAIC Gen AI Team\n")
+
+# 2
+for name in names22:
+    print(f"Welcome Dear Tacher {name.title()}")
+    print("PIAIC Gen AI Team\n")
+
+print("Pakistan zinda bad")
+
+# 3
+for name in names22[0:2]:
+    print(f"Welcome Dear Tacher {name.title()}")
+    print("PIAIC Gen AI Team\n")
+
+print("Pakistan zinda bad")
+
+# 4
+for name in names22[::-1]:
+    print(f"Welcome Dear Tacher {name.upper()}")
+    print("PIAIC Gen AI Team\n")
+print("Pakistan zinda bad\n")
+
+# example of for loop with else
+# 1
+names44: list[str] = ["Sir Zia", "Muhammad Qasim", "DR Noman"]
+for name in names44:
+    print(name)
+else:
+    print("Hello world")
+
+# 2
+names55: list[str] = ["Sir Zia", "Muhammad Qasim", "DR Noman"]
+user_input: str = input("Enter the name? ")
+for name in names55:
+    if name == user_input:
+        print("Found")
+        break
+else:
+    print("Hello world")
+
+# 3
+names66: list[str] = ["Sir Zia", "Muhammad Qasim", "DR Noman"]
+
+for name in names66:
+    print(name)
+    break
+else:
+    print("Hello world")
+
+# 4
+data_base: list[tuple[str, str]] = [
+    ("qasim", "123"),
+    ("sirzia", "345"),
+    ("ikhlas", "789"),
+]
+
+input_user: str = input("Enter user name? ")
+input_password: str = input("Enter user password? ")
+
+for row in data_base:
+    user, password = row
+    if input_user == user and input_password == password:
+        print(f"Valid User {user}")
+        break
+else:
+    print("Not found or Invalid user name")
+
+# 5
+magicians1: list[str] = ["alice", "david", "carolina"]
+for magician in magicians1:
+    print(f"{magician.title()}, that was a great trick!")
+print(f"I can't wait to see your next trick, {magician.title()}.\n")
+
+# enumerate function return a list with tuple including the index or the value
+# 1
+magicians11: list[str] = ["alice", "david", "carolina"]
+print(list(enumerate(magicians11)))
+
+# 2
+magicians33 = ["alice", "david", "carolina"]
+for index, name in enumerate(magicians33):
+    print(index, name)
+
+# Numbers with loop
+# range(start, end, step)
+
+# 1
+print(list(range(0, 20, 2)))
+print(list(range(10)))
+
+# 2
+for n in range(1, 11):
+    print(n)
+
+# 3
+user1: str = input("Enter a number? ")
+for n in range(1, 11):
+    print(f"{int(user1)} x {n} = {int(user1)*n}")
+
+# 4
+squares: list[int] = []
+for value in range(1, 11):
+    square = value**2
+    squares.append(square)
+print(squares)
+
+# List comprehensive style
+# [loop_body for item in items_list]
+
+for ip in range(1, 11):
+    print(ip**2)
+
+[ip**2 for ip in range(1, 11)]
+print([i**2 for i in range(1, 11)])
+
+# 1
+digits: list[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+print(digits)
+print(max(digits))
+print(min(digits))
+print(sum(digits))
+
+# Tuples are immutable in every language once their value is assigned cannot be changed but can be reinitialize
+names99: tuple[str, str, str] = ("A", "B", "C")
+
+# names99: tuple[str, str, str] = ("A", "B", "C")
+# names99[0] = "F"
+# print(names99)  cannot be possible
+
+# 1
+data23: tuple[str, list[int], bool] = ("A", [1, 2, 3], True)
+print(data23[1])
+data23[1].append(20)
+print(data23)
