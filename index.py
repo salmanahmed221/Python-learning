@@ -1,4 +1,6 @@
 from typing import Any
+from typing import Union
+
 
 # variables
 name: str = "My name is 'salman"
@@ -431,3 +433,157 @@ data23: tuple[str, list[int], bool] = ("A", [1, 2, 3], True)
 print(data23[1])
 data23[1].append(20)
 print(data23)
+
+# If-else-elif
+# if logic:
+#     True_block
+# else:
+#     False_block
+
+if True:
+    print("Pakistan zinda bad")
+else:
+    print("Hello world!")
+
+if False:
+    print("Pakistan zinda bad")
+else:
+    print("Hello world!")
+
+# comprehensive if-else
+# True_block if logic else False_block
+
+#     True_block               logic           False_block
+print("Pakistan zinda bad") if False else print("Hello world!")
+
+if True:
+    print("True Pakistan block")
+
+print("1")
+print("2")
+
+if False:
+    print("True Pakistan block")
+
+print("1")
+print("2")
+
+if True:
+    print("True_block")
+elif False:
+    print("elif logic1")
+elif False:
+    print("elif logic2")
+elif False:
+    print("elif logic3")
+else:
+    print("final else block")
+
+if False:
+    print("True_block")
+elif True:
+    print("elif logic1")
+elif False:
+    print("elif logic2")
+elif False:
+    print("elif logic3")
+else:
+    print("final else block")
+
+# chain1 run only one block
+if False:
+    print("True_block")
+elif False:
+    print("elif logic1")
+elif True:
+    print("elif logic2")
+elif True:
+    print("elif logic3")
+else:
+    print("final else block")
+
+# chain2 run only one block
+if False:
+    print("True_block")
+elif False:
+    print("elif logic1")
+elif False:
+    print("elif logic2")
+elif False:
+    print("elif logic3")
+else:
+    print("final else block")
+
+print("Pakistan")
+
+per: Union[int, float] = 88
+grade: Union[str, None] = None
+
+if per >= 80:
+    grade = "A+"
+elif per >= 70:
+    grade = "A"
+elif per >= 60:
+    grade = "B"
+elif per >= 50:
+    grade = "C"
+elif per >= 40:
+    grade = "D"
+elif per >= 33:
+    grade = "E"
+else:
+    grade = "Fail"
+
+print(f"Dear Student your percentage is {per} now your calculated grade is:\t {grade}")
+
+
+per1: Union[int, float] = int(input("Enter your percentage:\t"))
+# per : int | float = 88
+grade1: Union[str, None] = None
+
+if per1 >= 80:
+    grade1 = "A+"
+elif per1 >= 70:
+    grade1 = "A"
+elif per1 >= 60:
+    grade1 = "B"
+elif per1 >= 50:
+    grade1 = "C"
+elif per1 >= 40:
+    grade1 = "D"
+elif per1 >= 33:
+    grade1 = "E"
+else:
+    grade1 = "Fail"
+
+print(f"Dear Student your percentage is {per} now your calculated grade is:\t {grade}")
+
+
+PerType = Union[float, int]
+
+percentages : list[PerType] = [88, 99.9, 50, 51,65,70]
+
+grades : list[str] = []
+
+for per in percentages:
+    grade2 : str = ""
+
+    if (per >= 0) and (per < 33):
+        grade2 = "Fail"
+    elif (per >= 33) and (per < 40):
+        grade2 = "E"
+    elif (per >= 40) and (per < 50):
+        grade2 = "D"
+    elif (per >= 50) and (per < 60):
+        grade2 = "C"
+    elif (per >= 60) and (per <70) :
+        grade2 = "B"
+    elif (per >= 70) and (per <80) :
+        grade2 = "A"
+    elif (per >=80) and (per <= 100):
+        grade2 = "A+"
+
+    grades.append(grade2)
+
+print(percentages)
+print(grades)
