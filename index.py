@@ -741,14 +741,14 @@ for k in data04.keys():
     print(k)
 
 # 4 getting error on py file
-# keys : list[str] = ['id','name','fname','course']
-# data06 : dict[Key,Value] = {}
+keys: list[str] = ["id", "name", "fname", "course"]
+data06: dict[Key, None] = {}
 
-# print(data06)
+print(data06)
 
-# data06 = data06.fromkeys(keys) # inline
+data06 = dict.fromkeys(keys,None)  # inline
 
-# print(data06)
+print(data06)
 
 # 5
 data05: dict[Key, Value] = {
