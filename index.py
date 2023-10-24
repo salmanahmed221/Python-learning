@@ -561,12 +561,12 @@ print(f"Dear Student your percentage is {per} now your calculated grade is:\t {g
 
 PerType = Union[float, int]
 
-percentages : list[PerType] = [88, 99.9, 50, 51,65,70]
+percentages: list[PerType] = [88, 99.9, 50, 51, 65, 70]
 
-grades : list[str] = []
+grades: list[str] = []
 
 for per in percentages:
-    grade2 : str = ""
+    grade2: str = ""
 
     if (per >= 0) and (per < 33):
         grade2 = "Fail"
@@ -576,14 +576,201 @@ for per in percentages:
         grade2 = "D"
     elif (per >= 50) and (per < 60):
         grade2 = "C"
-    elif (per >= 60) and (per <70) :
+    elif (per >= 60) and (per < 70):
         grade2 = "B"
-    elif (per >= 70) and (per <80) :
+    elif (per >= 70) and (per < 80):
         grade2 = "A"
-    elif (per >=80) and (per <= 100):
+    elif (per >= 80) and (per <= 100):
         grade2 = "A+"
 
     grades.append(grade2)
 
 print(percentages)
 print(grades)
+
+# set datatype
+data3: set = {7, 1, 2, 1, 1, 1, 1, 3, 2}
+print(data3)  # return unique
+
+# Dictionary
+# 1
+data33: dict[str, str] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+print(data33)
+
+# 2
+Key = Union[int, str]  # create custom type
+Value = Union[int, str, list, dict, tuple, set]
+
+data11: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+print(data11)
+print(data11["name"])
+print(data11["fname"])
+print(data11["education"])
+
+# 3
+data45: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+    0: "Pakistan",
+}
+
+print(data45)
+print(data45["name"])
+print(data45["fname"])
+print(data45["education"])
+print(data45[0])
+
+# 4
+data99: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+    # [1,2,3] : "Pakistan", # error
+    # (1,2,3) : "Pakistan", #error
+    # {1,2,3} : "pakistan", #error
+}
+
+print(data99)
+print(data99["name"])
+print(data99["fname"])
+print(data99["education"])
+
+# 5
+data00: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+    "abc": [1, 2, 3],
+    "xyz": {1, 2, 3},
+    "efg": (1, 2, 3),
+    "cde": {"a": 1, "b": 2},
+}
+
+print(data00)
+print(data00["name"])
+print(data00["fname"])
+print(data00["cde"])
+print(data00["education"])
+
+# 6
+# data77 : dict[Key,Value] = {  This doesnt work on .py file it works on ipynb
+#                         "fname":"Muhammad Aslam",
+#                         "name":"Muhammad Qasim",
+#                         "education": "MSDS",
+#                         "abc" : [1,2,3],
+#                         'xyz': {1,2,3},
+#                         'efg' : (1,2,3),
+#                         'cde' : {"a":1, "b":2}
+#                         }
+
+# data77['cde']['b']
+
+# 7
+data55: dict[Key, Value] = {}
+
+data55["name"] = "Muhammad Qasim"  # add new key and values
+data55["fname"] = "Muhammad Aslam"
+data55["education"] = "MSDS"
+print(data55)
+
+# 8
+data91: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+print(data91)
+data91["name"] = "M.Qasim"  # update
+print(data91)
+
+# methods of dictionary
+data01: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+
+print([i for i in dir(data01) if "__" not in i])
+
+# 1
+data02: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+
+#                 key
+print(data02.get("pakistan"))
+print(data02.get("pakistan", "NA"))
+print(data02.get("name", "NA"))
+
+# 2
+data03: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+for Kd in data03:
+    print(Kd)
+
+# 3
+data04: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+print(data04.keys())  # keys
+print(data04.values())  # values
+print(data04.items())
+
+for k in data04.keys():
+    print(k)
+
+# 4 getting error on py file
+# keys : list[str] = ['id','name','fname','course']
+# data06 : dict[Key,Value] = {}
+
+# print(data06)
+
+# data06 = data06.fromkeys(keys) # inline
+
+# print(data06)
+
+# 5
+data05: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+
+print(data05.keys())  # keys
+print(data05.values())  # values
+print(data05.items())
+
+for kgf in data05.values():
+    print(kgf)
+
+# shuffle
+a1: int = 7
+b1: int = 9
+
+a1, b1 = b1, a1
+
+print(a1, b1)
+
+
