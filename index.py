@@ -663,17 +663,85 @@ print(data00["cde"])
 print(data00["education"])
 
 # 6
-# data77 : dict[Key,Value] = {  This doesnt work on .py file it works on ipynb
-#                         "fname":"Muhammad Aslam",
-#                         "name":"Muhammad Qasim",
-#                         "education": "MSDS",
-#                         "abc" : [1,2,3],
-#                         'xyz': {1,2,3},
-#                         'efg' : (1,2,3),
-#                         'cde' : {"a":1, "b":2}
-#                         }
+data09: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+    "abc": [1, 2, 3],
+    "xyz": {1, 2, 3},
+    "efg": (1, 2, 3),
+    "cde": {"a": 1, "b": 2},
+}
 
-# data77['cde']['b']
+print(data09)
+print(data09["name"])
+print(data09["fname"])
+if isinstance(data09["cde"], dict):
+    value_b = data09["cde"].get("b")
+    if value_b is not None:
+        print(value_b)
+
+print(data09["education"])
+
+data10: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+    "abc": [1, 2, 3],
+    "xyz": {1, 2, 3},
+    "efg": (1, 2, 3),
+    "cde": {"a": 1, "b": 2},
+}
+
+print(data10)
+print(data10["name"])
+print(data10["fname"])
+if isinstance(data10["abc"], list):
+    value_b = data10["abc"][0]
+    if value_b is not None:
+        print(value_b)
+
+print(data10["education"])
+
+data13: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+    "abc": [1, 2, 3],
+    "xyz": {1, 2, 3},
+    "efg": (1, 2, 3),
+    "cde": {"a": 1, "b": 2},
+}
+
+print(data13)
+print(data13["name"])
+print(data13["fname"])
+if isinstance(data13["efg"], tuple):
+    value_b = data13["efg"][0]
+    if value_b is not None:
+        print(value_b)
+
+print(data11["education"])
+
+data12: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+    "abc": [1, 2, 3],
+    "xyz": {1, 2, 3},
+    "efg": (1, 2, 3),
+    "cde": {"a": 1, "b": 2},
+}
+
+print(data12)
+print(data12["name"])
+print(data12["fname"])
+if isinstance(data12["xyz"], set):
+    value_b = data12["xyz"]
+    if value_b is not None:
+        print(value_b)
+
+print(data12["education"])
 
 # 7
 data55: dict[Key, Value] = {}
@@ -746,7 +814,7 @@ data06: dict[Key, None] = {}
 
 print(data06)
 
-data06 = dict.fromkeys(keys,None)  # inline
+data06 = dict.fromkeys(keys, None)  # inline
 
 print(data06)
 
@@ -772,5 +840,3 @@ b1: int = 9
 a1, b1 = b1, a1
 
 print(a1, b1)
-
-
