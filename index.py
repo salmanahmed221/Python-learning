@@ -1,5 +1,6 @@
 from typing import Any
 from typing import Union
+import pandas as pd
 
 
 # variables
@@ -602,7 +603,7 @@ data33: dict[str, str] = {
 print(data33)
 
 # 2
-Key = Union[int, str]  # create custom type
+Key = Union[int, str, tuple]  # create custom type
 Value = Union[int, str, list, dict, tuple, set]
 
 data11: dict[Key, Value] = {
@@ -635,9 +636,9 @@ data99: dict[Key, Value] = {
     "fname": "Muhammad Aslam",
     "name": "Muhammad Qasim",
     "education": "MSDS",
-    # [1,2,3] : "Pakistan", # error
-    # (1,2,3) : "Pakistan", #error
-    # {1,2,3} : "pakistan", #error
+    # [1, 2, 3]: "Pakistan",  # error
+    (1, 2, 3): "Pakistan",
+    # {1, 2, 3}: "pakistan",  # error
 }
 
 print(data99)
@@ -808,7 +809,7 @@ print(data04.items())
 for k in data04.keys():
     print(k)
 
-# 4 getting error on py file
+# 4
 keys: list[str] = ["id", "name", "fname", "course"]
 data06: dict[Key, None] = {}
 
@@ -832,6 +833,88 @@ print(data05.items())
 
 for kgf in data05.values():
     print(kgf)
+
+# 6
+data07: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+print("Before", data07)
+
+data07.clear()
+print("After", data07)
+
+# 7
+# data08: dict[Key, Value] = {
+#     "fname": "Muhammad Aslam",
+#     "name": "Muhammad Qasim",
+#     "education": "MSDS",
+# }
+
+# print("Before", data08)
+
+# del data08
+
+# print("After", data08)
+
+# 8
+data14: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+print("Before", data14)
+data14.pop("education")
+print("After", data14)
+
+# 9
+data15: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+print("Before", data15)
+
+data15.popitem()
+print("After", data15)
+
+# 10
+data16: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+print("Before", data16)
+
+data16.setdefault("Pakistan", "Empty value")
+print("After", data16)
+
+# 11
+data17: dict[Key, Value] = {
+    "fname": "Muhammad Aslam",
+    "name": "Muhammad Qasim",
+    "education": "MSDS",
+}
+
+
+data1: dict[Key, Value] = {"name": "M.Qasim", "age": 30, "Height": "6 Feet"}
+
+data17.update(data1)
+print(data17)
+
+# 12 Pandas library use for making data in excel form
+students_data: dict[str, list[Any]] = {
+    "roll no": [1, 2, 3],
+    "Name": ["Sir Zia", "Sir Inam", "Muhammad Qasim"],
+    "education": ["Master", "Master", "Master"],
+}
+
+dfg: pd.DataFrame = pd.DataFrame(students_data)
+print(dfg)
 
 # shuffle
 a1: int = 7
