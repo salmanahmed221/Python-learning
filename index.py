@@ -1,6 +1,7 @@
 from typing import Any
 from typing import Union
 import pandas as pd
+import sys
 
 
 # variables
@@ -923,3 +924,126 @@ b1: int = 9
 a1, b1 = b1, a1
 
 print(a1, b1)
+
+# Loop and input from user
+# while
+# for
+
+# controls
+# break
+# continue
+# pass
+
+# input with input function
+# input from console
+
+# Loop working on iterative data types
+l1: list[int] = [1, 2, 3, 4, 5, 6]
+for n in l1:
+    print(n)
+
+l2: tuple[int, int, int, int, int, int] = (1, 2, 3, 4, 5, 6)
+for n in l2:
+    print(f"current number :{n}")
+
+l3: str = "Pakistan"
+for i in l3:
+    print(i)
+
+l4: dict[str, str] = {"name": "Muhammad Qasim", "fname": "Muhammad Aslam"}
+for k in l4:
+    print(f"dictionary key {k} and value is {l4[k]}")
+
+l5: set[int] = {1, 2, 3, 4, 1, 1, 1, 1}
+for k in l5:
+    print(f"set item is  {k} ")
+
+# input from user
+name11: str = input("What is your name? : \t")
+print(type(name11))
+print(f"Welecom dear User Mr/Miss {name11}!")
+
+# While loop
+# while logic: # True/False
+#     loop_body
+
+# 1
+flag: bool = True  # flag
+current_number: int = 0  #
+while flag:
+    print(f"current number is :{current_number}")
+    current_number += 1
+
+    if current_number == 10:  # flag false at some point
+        flag = False
+
+# 2
+l6: list[int] = [100, 200, 300]
+index2: int = 0  #
+
+while index2 < len(l6):
+    print(f"current index is :{index2} and list value is {l6[index2]}")
+    index2 += 1
+
+# 3
+data18: list[dict[str, str]] = []
+flag2: bool = True
+
+while flag2:
+    print("write quite or exit to stop this program")
+    name21: str = input("Your good name ? \t:")
+    eduction: str = input("Your last education? \t")
+
+    if name21 in ["exit", "quite", "close", "stop"] or eduction in [
+        "exit",
+        "quite",
+        "close",
+        "stop",
+    ]:
+        flag2 = False
+        break
+    data18.append({"name": name21, "education": eduction})
+
+print(data18)
+
+# controls
+
+# 1 break
+for i9 in range(1, 11):
+    if i9 == 5:
+        break
+    print(i9)
+
+# 2 continue
+for i9 in range(1, 11):
+    if i9 == 5:
+        continue
+    print(i9)
+
+# 3 pass
+for i10 in range(1, 1000):
+    pass
+
+if "a" == "A":
+    pass
+
+print("hi")
+
+# For input purpose sys.argv
+print("line1")
+print("line2")
+
+print(type(sys.argv))
+print(sys.argv)  # iterative data type list[str] 0=filename **value user define
+
+# Extract even number
+data19: list[int] = [1, 3, 5, 6, 3, 15, 18]
+for i54 in data19:
+    if i54 % 2 == 0:
+        print(i54)
+
+# Extract odd number
+data20: list[int] = [1, 3, 5, 6, 3, 15, 18]
+for i54 in data20:
+    if i54 % 2 != 0:
+        print(i54)
