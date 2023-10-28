@@ -2,7 +2,8 @@ from typing import Any
 from typing import Union
 import pandas as pd
 import sys
-
+from typing import Callable
+from typing import Iterator
 
 # variables
 name: str = "My name is 'salman"
@@ -1047,3 +1048,229 @@ data20: list[int] = [1, 3, 5, 6, 3, 15, 18]
 for i54 in data20:
     if i54 % 2 != 0:
         print(i54)
+
+
+# Function
+# pre-define function
+# provided by in language
+# user-define function
+# custom function
+
+# Syntax function
+# def function_name(param1:type, param2:type,...)->Return_type:
+#     function_body
+
+# function_name(arg1,arg2)
+
+
+# 1
+def piaic() -> None:  # declaration/function signature
+    # function body start
+    print("PIAIC Generative Artificial Intelligence")  # statment1
+    print("Python Crash course")  # statment2
+    # function body end
+
+
+piaic()  # calling
+
+
+# 2
+def sum(x: int, y: int) -> int:
+    a: int = x + y
+    print(a)
+    return a
+
+
+sum(9, 9)
+
+# Required parameters functions
+
+
+# 1
+def add_two_numbers(num1: int, num2: int) -> int:
+    print(num1 + num2)
+    return num1 + num2
+
+
+add_two_numbers(7, 20)  # agr1, arg2
+
+
+# 2
+def add_two_numbers1(num1: int, num2: int) -> int:
+    print(f"num1 value {num1} and num 2 value {num2}")
+    return num1 + num2
+
+
+add_two_numbers1(7, 20)  # agr1, arg2 postional
+
+
+# 3
+def add_two_numbers2(num1: int, num2: int) -> int:
+    print(f"num1 value {num1} and num 2 value {num2}")
+    return num1 + num2
+
+
+add_two_numbers2(num2=7, num1=20)  # agr1, arg2 key word arguments
+
+
+# fucntion with optional parameters
+def add_two_numbers3(num1: int, num2: int = 3) -> int:
+    print(num1 + num2)
+    return num1 + num2
+
+
+add_two_numbers3(7)
+add_two_numbers3(9, 4)
+
+# Syntax lambda function
+# one line function
+# without name
+# only use in this line
+# lambda param1,param2 : function_body
+
+# 1
+ax = lambda num1, num2: num1 + num2
+
+print(ax(7, 8))
+
+# 2
+add: Callable[[int, int], int] = lambda x, y: x + y
+result = add(10, 20)  # result will be 30
+print(result)
+
+# 3
+sum1: Callable[[int, int], int] = lambda a, b: a + b
+print(sum1(9, 1))
+
+# 4
+data2021: list[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+data2022 = list(map(lambda x: x**2, data2021))
+print(data2022)
+
+# 5
+data2023: list[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+data2024 = list(filter(lambda x: x % 2 == 0, data2023))
+print(data2024)
+
+# 6
+data991: list[int] = list(filter(lambda x: x % 2 == 0, range(1, 101)))
+print(len(data991))
+print(data991)
+
+# 7
+data992: Iterator[int] = filter(lambda x: x % 2 == 0, range(1, 101))
+print(next(data992))
+print(next(data992))
+
+# pass unlimited arguments
+
+
+# 1
+def abce(*nums):
+    print(nums, type(nums))
+    total = 0
+    for n in nums:
+        total += n
+    print(total)
+    return total
+
+
+abce(1, 2, 3, 3, 5, 6)
+
+
+# 2
+def sum5(*num: int) -> tuple[int, ...]:
+    print(num, type(num))
+    return num
+
+
+sum5(1, 2, 3, 45)
+
+
+# 3
+def greet(*names: str) -> None:
+    """
+    This function greets all persons in the names tuple.
+    """
+    for name in names:
+        print("Hello", name)
+
+
+greet("Monica", "Luke", "Steve", "John", "Sir Zia", "Muhammad Qasim")
+
+
+# 4
+def greet2(**xyz) -> None:
+    print(xyz, type(xyz))
+
+
+greet2(a="pakistan", b="China")
+
+
+# 5
+def sum6(**num: int) -> dict[str, int]:
+    print(num, type(num))
+    return num
+
+
+sum6(a=1, b=2, c=3, d=45)
+
+
+# 6
+def greet3(**xyz: str) -> None:
+    for k, v in xyz.items():
+        print(f"The key is {k} and value is {v}")
+
+
+greet3(a="pakistan", b="China")
+
+
+# 7
+def my_function(a, b, *abc, **xyz):
+    print(a, b, abc, xyz)
+
+
+my_function(1, 2, 7, 9, 9, 9, c=20, d=30, x=100)
+
+
+# 8
+def my_function1(a: int, b: int, *abc: int, **xyz: int):
+    print(a, b, abc, xyz)
+
+
+my_function1(1, 2, 7, 9, 9, 9, c=20, d=30, x=100)
+
+# Recursice function A function call itself in his body
+
+
+# 1
+def factorial(n: int) -> int:
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+print(factorial(5))
+
+# Generator function
+
+
+# 1
+def my_range(start, end, step=2):
+    for i in range(start, end + 1, step):
+        yield i  # The yield statement in Python is used within a function to turn it into a generator
+
+
+aw = my_range(1, 10)
+print(aw)
+print(list(aw))
+
+
+# 2
+def my_range1(start: int, end: int, step: int = 2) -> Iterator[int]:
+    for i in range(start, end + 1, step):
+        yield i
+
+
+print(list(my_range1(1, 9, 1)))
