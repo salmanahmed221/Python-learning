@@ -1274,3 +1274,59 @@ def my_range1(start: int, end: int, step: int = 2) -> Iterator[int]:
 
 
 print(list(my_range1(1, 9, 1)))
+
+# Decorator function is a function which takes another function,updates it and then return it
+
+
+# 1
+def greet11(fn: Callable[[], None]):
+    def wrapper():
+        print("Good morning")
+        fn()
+        print("Thanks for using it")
+
+    return wrapper
+
+
+@greet11
+def hello():
+    print("Hello world")
+
+
+hello()
+
+
+# 2
+def greet121(fn: Callable[[int, int], None]):
+    def wrapper(*args, **kargs):
+        print("Good morning")
+        fn(*args, **kargs)
+        print("Thanks for using it")
+
+    return wrapper
+
+
+@greet121
+def sum12(x, y):
+    print(x + y)
+
+
+sum12(4, 5)
+
+
+# 3
+def my_decorator(func: Callable[[int], None]) -> Callable[[int], None]:
+    def wrapper(num1: int) -> None:
+        print("Something is happening before the function is called.")
+        func(num1)
+        print("Something is happening after the function is called.")
+
+    return wrapper
+
+
+@my_decorator
+def say_hello(num1: int) -> None:
+    print(num1)
+
+
+say_hello(100)

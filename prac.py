@@ -1,10 +1,18 @@
-from typing import Iterator
+from typing import Callable
 
 
-def my_range1(start: int, end: int, step: int = 2) -> Iterator[int]:
-    for i in range(start, end + 1, step):
-        yield i
-    return i
+def my_decorator(func: Callable[[int], None]) -> Callable[[int], None]:
+    def wrapper(*args, **krags):
+        print("Something is happening before the function is called.")
+        func(*args, **krags)
+        print("Something is happening after the function is called.")
+
+    return wrapper
 
 
-print(list(my_range1(1, 9, 1)))
+@my_decorator
+def say_hello(num1: int) -> None:
+    print(num1)
+
+
+say_hello(100)
