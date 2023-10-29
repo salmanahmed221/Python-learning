@@ -1330,3 +1330,154 @@ def say_hello(num1: int) -> None:
 
 
 say_hello(100)
+
+# shallow copy
+# 1
+list_a: list[int] = [1, 2, 3]  # 4
+list_b = list_a
+list_a.append(4)
+print("list_b:", list_b)  # Output: list_b: [1, 2, 3, 4]
+
+# 2
+num_a: int = 5
+num_b = num_a
+num_a += 1
+print("num_b:", num_b)  # Output: num_b: 5
+
+# Addressing Changes without Function Calls
+# 1
+xz1 = 10
+print("Before modification:", xz1, id(xz1))
+xz1 += 1
+print("After modification:", xz1, id(xz1))
+
+# 2
+a12: int = 5
+
+print(f"First Assignment of variable a value is {id(a12)}")
+
+
+def abced(num1: int) -> None:
+    print(f"\tValue of start of function {num1} address {id(num1)}")
+    num1 = 6  # copy now it will change update object
+
+    print(f"\tnum1 value end of function {num1} address {id(num1)}")  # change here
+    print("\tEnd of program")
+
+
+abced(a12)  # pass by value imutable
+
+print(f"End of program variable value is {a12} address of a {id(a12)}")
+
+# 3
+a21: list[int] = [1, 2, 3, 4]
+
+print(id(a21))
+
+
+def abc1(num1: list[int]) -> None:
+    print(f"\tValue of start of function {num1} address {id(num1)}")
+    num1.append(200)  # added on element
+    print(f"num1 value is {num1} address {id(num1)}")
+
+
+abc1(a21)  # pass by refference (mutable data type)
+
+print(a21)
+
+# Run time Error
+# 1
+a2: int = int(input("Enter number1:\t"))
+b2: int = int(input("Enter number2:\t"))
+
+print(a2 / b2)
+
+# 2
+names42: list[str] = ["Sir Zia", "Sir Inam", "Muhammad Qasim"]
+indx: int = int(input("Enter index number:\t"))
+print(names42[indx])
+
+# 3
+# data : tuple[int,int,int] = (1,2,3)
+# data[0] = 2000
+
+# Handle Run time error
+# Syntax
+
+# try:
+#     logic
+# except (Error_class1, Error_class2):
+#     if error accured then run this block
+# else:
+#     if error not accured
+# finally:
+#     always run
+
+# 1
+print("logic1")
+print("logic2")
+print(5 / 0)  # Error
+print("logic4")
+print("logic5")
+
+# 2
+print("logic1")
+print("logic2")
+try:
+    print(5 / 0)  # Error
+except ZeroDivisionError:
+    print("Zerro Division Error!")
+print("logic4")
+print("logic5")
+
+# 3
+print("logic1")
+print("logic2")
+try:
+    print(5 / 0)  # Error
+except ZeroDivisionError:
+    pass
+print("logic4")
+print("logic5")
+
+# 4
+# print("logic1")
+# print("logic2")
+
+# l12: list[int] = [1, 2, 3]
+
+# try:
+#     print(5 / 0)  # Error
+#     print(l12[0])
+#     print(xyz1)
+
+
+# except (ZeroDivisionError, IndexError, NameError):
+#     print("Zerro Division Error!")
+# print("logic4")
+# print("logic5")
+
+# 5
+# print("logic1")
+# print("logic2")
+
+# l12: list[int] = [1, 2, 3]
+
+# try:
+#     print(5 / 0)  # Error
+#     print(l12[0])
+#     print(xyz1)
+
+# except ZeroDivisionError:
+#     print("Zero Division Error!")
+
+
+# except IndexError:
+#     print("Index Error!")
+
+
+# except NameError:
+#     print("Name Error!")
+
+# print("logic4")
+# print("logic5")
