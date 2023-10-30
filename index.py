@@ -4,6 +4,10 @@ import pandas as pd
 import sys
 from typing import Callable
 from typing import Iterator
+from typing import TextIO
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import PyPDF2
 
 # variables
 name: str = "My name is 'salman"
@@ -1481,3 +1485,149 @@ print("logic5")
 
 # print("logic4")
 # print("logic5")
+
+# Error handling for dynamic errors
+# 1
+
+l11: list[int] = [1, 2, 3]
+try:
+    # print(age)
+    print(l11[200])
+except Exception as e:
+    print(f"Some thing is wrong!\n{e}")
+
+
+# Create your custom error
+class StudentCard:
+    def __init__(self, roll_no: int, name: str, age: int) -> None:
+        if age < 18 or age > 60:
+            raise StudentAgeError("Your are not eligible for this program!")
+        self.roll_no = roll_no
+        self.name = name
+        self.age = age
+
+
+class StudentAgeError(Exception):  # custom error class
+    pass
+
+
+studen1 = StudentCard(1, "Qasim", 130)
+print(studen1.name, studen1.roll_no, studen1.age)
+studen1 = StudentCard(1, "Hammad", 16)
+
+# File handling
+
+# 1 open,close,read file in this way we have to close the file by ourself
+data44: TextIO = open("./abc.txt")  # connectivity with abc.txt file
+print(data44.read())
+data44.close()  # close connectivity
+
+# 2 but in this way we do not have to close the file it happen automatically
+with open("./abc.txt") as file:
+    print(file.read())
+
+# 3
+with open("./abc.txt") as file1:  # type: TextIO
+    print(type(file1))
+    print(file1.readline())  # read only one line (first line)
+    print(file1.readline())  # line2
+
+# 4
+with open("./abc.txt") as file2:  # type: TextIO
+    print(type(file2))
+    print(file2.readline(), end="")  # read only one line
+    print(file2.readline(), end="")  # line2
+
+# 5
+with open("./abc.txt") as file3:  # type: TextIO
+    print(type(file3))
+    print(file3.readlines())  # read all lines in the form of list
+
+# 6
+with open("./abc.txt", "r") as file4:  # type: TextIO
+    print(type(file4))
+    print(file4.readlines()[:3])
+
+# 7
+with open("./abc.txt", "r") as file5:  # type: TextIO
+    print(file5.read())
+    file5.write("Pakistan zinda bad")  # r can only read file
+
+# 8
+with open("./abc.txt", "w") as file7:  # type: TextIO
+    print(file7.read())
+    file7.write("Pakistan zinda bad")
+
+# 9
+with open("./abc1.txt", "w") as file6:  # type: TextIO
+    file6.write("Pakistan zinda bad")
+
+# 10
+with open("./abc1.txt", "r+") as file8:  # type: TextIO
+    print(file8.read())
+    file8.write("WE love our country!")
+
+# 11
+with open("./abc1.txt", "r+") as file10:  # type: TextIO
+    print(file10.read())
+
+    file10.write("WE love our country!")
+
+    print("After", file10.read())
+
+# 12
+with open("./abc1.txt", "r+") as file9:  # type: TextIO
+    print(file9.read())
+
+    file9.write("WE love our country!")
+    file9.seek(0)
+
+    print("After", file9.read())
+
+# 13
+with open("./abc2.txt", "r") as file11:  # type: TextIO
+    print(file11.read())
+
+# 14
+with open("./abc2.txt", "w") as file12:  # type: TextIO
+    # print(file.read())
+    file12.write("Pakistan")
+
+# if file exist then it overwrite the text
+# if file not exist then it will create new file
+
+# 15
+with open("./abc3.txt", "a") as file13:  # type: TextIO
+    # print(file.read())
+    file13.write("Pakistan")
+
+# if file not exist then it will create new file
+# add content in last
+
+# read some real world data files
+# image
+# csv
+# live camera
+
+# 1 cs file into table through pandas library
+df1: pd.DataFrame = pd.read_csv("./data.csv")
+print(df1)
+
+# 2 excel file into table through pandas library
+df2: pd.DataFrame = pd.read_excel("./demo.xlsx")
+print(df2)
+
+# 3 img checking in python through matplotlib library
+img = mpimg.imread("img1.jpeg")  # covert into numpy array
+print(plt.imshow(img))
+
+# 4 pdf into python through PyPDF2 library
+def read_pdf(file_path: str) -> list[str]:
+    with open(file_path, "rb") as file:  # The 'b' in 'rb' stands for binary mode
+        reader: PyPDF2.PdfReader = PyPDF2.PdfReader(file)
+        text_content: list[str] = [page.extract_text() for page in reader.pages]
+        return text_content
+
+
+pages: list[str] = read_pdf("./mypdf.pdf")
+print(pages)
