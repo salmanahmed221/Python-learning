@@ -8,6 +8,7 @@ from typing import TextIO
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import PyPDF2
+from typing import TypeVar, Generic
 
 # variables
 name: str = "My name is 'salman"
@@ -1621,6 +1622,7 @@ print(df2)
 img = mpimg.imread("img1.jpeg")  # covert into numpy array
 print(plt.imshow(img))
 
+
 # 4 pdf into python through PyPDF2 library
 def read_pdf(file_path: str) -> list[str]:
     with open(file_path, "rb") as file:  # The 'b' in 'rb' stands for binary mode
@@ -1631,3 +1633,304 @@ def read_pdf(file_path: str) -> list[str]:
 
 pages: list[str] = read_pdf("./mypdf.pdf")
 print(pages)
+
+
+# OOP (Object Oriented Programming)
+# Class
+# method
+# first argument must be additional variable (self, this, or anything else)
+# attribute
+# connect with individual object
+# class variables
+# constructor
+# def __init__(self,arg1, arg2)
+# Class variable
+# this value use for all objects
+# ClassName.class_vriable
+# class ClassName():
+#     class_variable1 : type = Value
+# Syntax of class
+# class ClassName():
+#     pass
+
+
+# 1
+class Teacher:
+    name: str
+    age: int
+
+    def __init__(self, age: int, name: str) -> None:
+        self.age = age
+        self.name = name
+
+    def Personality(self):
+        print("The teacher personality is good")
+
+
+obj: Teacher = Teacher(20, "Ali")
+print(obj.age)
+print(obj.name)
+obj.Personality()
+
+
+# 2
+class Teacher1:
+    def __init__(
+        self, teacher_id: int, teacher_name: str
+    ) -> None:  # method/constructor
+        self.name: str = teacher_name  # self.attribute_name = value
+        self.teacher_id: int = teacher_id
+        self.organization_name: str = "PIAIC"
+
+    def speak(self, words: str) -> None:  # method
+        print(f"{self.name} is speaking {words}")
+
+    def teaching(self, subject: str) -> None:  # method
+        print(f"{self.name} is teaching {subject}...!")
+
+
+teacher1: Teacher1 = Teacher1(12, "Sana")
+print(teacher1.name)
+print(teacher1.organization_name)
+print(teacher1.teacher_id)
+teacher1.speak("Hello")
+teacher1.teaching("Python")
+
+# Class Variable
+# Class variable
+# this value use for all objects
+# ClassName.class_variable
+# object_name.class_variable
+# class ClassName():
+#     class_variable1 : type = Value
+
+
+# 1
+class Teacher2:
+    counter: int = 0  # Class variable1
+    help_line_number: str = "0315-2968211"  # class variable2
+
+    def __init__(
+        self, teacher_id: int, teacher_name: str
+    ) -> None:  # method/constructor
+        self.name: str = teacher_name  # self.attribute_name = value
+        self.teacher_id: int = teacher_id
+        self.organization_name: str = "PIAIC"
+        Teacher2.counter += 1
+
+    def speak(self, words: str) -> None:  # method
+        print(f"{self.name} is speaking {words}")
+
+    def teaching(self, subject: str) -> None:  # method
+        print(f"{self.name} is teaching {subject}...!")
+
+    def details(self) -> None:
+        information: str = f"""
+Teacher name is {self.name}
+our help line number is {Teacher2.help_line_number}
+
+"""
+        print(information)
+
+
+obj1: Teacher2 = Teacher2(1, "Sir Zia Khan")
+obj2: Teacher2 = Teacher2(2, "Muhammad Qasim")
+print(obj1.counter)
+print(obj2.counter)
+print(Teacher2.counter)
+
+print(obj1.help_line_number)
+print(obj2.help_line_number)
+print(Teacher2.help_line_number)
+
+# Inheritance
+# class ChileClass(ParentClass):
+#     pass
+
+
+# 1
+class Parents:
+    def __init__(self) -> None:
+        self.eye_color: str = "Brown"
+        self.hair_color: str = "black"
+
+    def speak(self, words: str) -> None:
+        print(f"Parent method speak: {words}")
+
+    def watching(sef, object_name: str) -> None:
+        print(f"You are looking {object_name}!")
+
+
+class Child(Parents):
+    pass
+
+
+obj3: Parents = Parents()
+print(obj3.eye_color)
+print(obj3.hair_color)
+obj3.speak("Pakistan zinda bad!")
+obj3.watching("TV")
+
+print("======Child object=======")
+### Child object
+
+obj4: Child = Child()
+obj4.watching("Cenima")
+obj4.speak("Hello World")
+print(obj4.eye_color)
+print(obj4.hair_color)
+
+
+# 2
+class Parents1:
+    def __init__(self) -> None:
+        self.eye_color: str = "Brown"
+        self.hair_color: str = "black"
+
+    def speak(self, words: str) -> None:
+        print(f"Parent method speak: {words}")
+
+    def watching(sef, object_name: str) -> None:
+        print(f"You are looking {object_name}!")
+
+
+class Child1(Parents1):
+    def teaching(self, subject: str) -> None:
+        print(f"Child method for teaching : {subject}")
+
+
+obj5: Parents1 = Parents1()
+print(obj5.eye_color)
+print(obj5.hair_color)
+obj5.speak("Pakistan zinda bad!")
+obj5.watching("TV")
+
+
+print("======Child object=======")
+### Child object
+
+obj6: Child1 = Child1()
+obj6.watching("Cenima")
+obj6.speak("Hello World")
+print(obj6.eye_color)
+print(obj6.hair_color)
+obj6.teaching("Generative AI")
+
+
+# 3
+class Employee:
+    def __init__(self, name: str) -> None:
+        self.name: str = name
+        self.education: str = ""
+        self.department: str = ""
+
+
+class Designer(Employee):
+    def __init__(self, title: str, name: str) -> None:
+        super().__init__(name)
+        self.title: str = title
+
+
+class Developer(Employee):
+    def __init__(self, title: str, name: str) -> None:
+        super().__init__(name)
+        self.title: str = title
+        self.programming_skills: list[str] = ["python"]
+
+
+designer1: Designer = Designer("Animation Artist", "Asif Khan")
+dev1: Developer = Developer("GenAI Engineer", "John Doe")
+
+print(designer1.title)  # Output: Animation Artist
+print(dev1.programming_skills)  # Output: ['python']
+
+
+# 4
+class Employee1:
+    name: str
+    age: int
+
+    def __init__(self, name: str, age: int) -> None:
+        self.name = name
+        self.age = age
+
+
+class Designer1(Employee1):
+    title: str
+
+    def __init__(self, title: str, name: str, age: int) -> None:
+        super().__init__(name, age)
+        self.title: str = title
+
+
+class Developer1(Employee1):
+    skills: str
+
+    def __init__(self, skills: str, name: str, age: int) -> None:
+        super().__init__(name, age)
+        self.skills: str = skills
+        self.programming_skills: list[str] = ["python"]
+
+
+designer2: Designer1 = Designer1("Animation Artist", "Asif Khan", 20)
+dev2: Developer1 = Developer1("GenAI Engineer", "John Doe", 34)
+
+print(designer2.title)  # Output: Animation Artist
+print(dev2.programming_skills)
+
+
+# Multiple inheritance
+# 1
+class A1:
+    name: str
+    age: int
+
+    def __init__(self, name: str, age: int) -> None:
+        self.name = name
+        self.age = age
+
+
+class B1:
+    title: str
+
+    def __init__(self, title: str) -> None:
+        self.title = title
+
+
+class C1(A1, B1):
+    skills: str
+
+    def __init__(self, skills: str, name: str, age: int, title: str) -> None:
+        A1.__init__(self, name, age)  # Call A's constructor explicitly
+        B1.__init__(self, title)  # Call B's constructor explicitly
+        self.skills = skills
+        self.programming_skills = ["python"]
+
+
+# Generice class
+# 1
+T = TypeVar("T")
+
+
+class Node(Generic[T]):
+    x: T
+
+    def __init__(self, x: T) -> None:
+        self.x = x
+
+
+x1 = Node("")  # Inferred type is Node[str]
+y1 = Node(0)  # Inferred type is Node[int]
+z1 = Node(True)  # Inferred type is Node[Any]
+
+a122 = Node[int](0)
+b12 = Node[str]("a")
+b121 = Node[bool](False)
+a1211 = Node[tuple[int, int, int]]((1, 2, 3))
+d1211 = Node[list[int]]([1, 2, 3])
+
+p1 = Node[int](0)
+q1 = Node[str]("Hello")
+
+print(a1211.x)
+print(d1211.x)
