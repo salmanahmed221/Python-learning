@@ -1,5 +1,5 @@
 from typing import Any
-from typing import Union
+from typing import Union, overload
 import pandas as pd
 import sys
 from typing import Callable
@@ -1907,6 +1907,43 @@ class C1(A1, B1):
         self.programming_skills = ["python"]
 
 
+# 2 In multiple inheritance if both parent have same method or variable then it will take nearest to it in this case it will take mother speaking method or gender variable
+class Mother:
+    gender: str = "Female"
+
+    def __init__(self, name: str) -> None:
+        self.name: str = name
+        self.eye_color: str = "blue"
+
+    def speaking(self, words: str) -> str:
+        return f"Monther Speaking function: {words}"
+
+
+class Father:
+    gender: str = "Male"
+
+    def __init__(self, name: str) -> None:
+        self.name: str = name
+        self.height: str = "6 Feet"
+
+    def speaking(self, words: str) -> str:
+        return f"Father Speaking function: {words}"
+
+
+class Child12(Mother, Father):
+    def __init__(self, mother_name: str, father_name: str, child_name: str) -> None:
+        Mother.__init__(self, mother_name)
+        Father.__init__(self, father_name)
+        self.child_name: str = child_name
+
+
+qasim: Child12 = Child12("Naseem Bano", "Muhammad Aslam", "Muhammad Qasim")
+
+print(f"object height {qasim.height}")
+print(qasim.gender)
+print(f"object eye color {qasim.eye_color}")
+print(qasim.speaking("Pakistan zinda bad"))
+
 # Generice class
 # 1
 T = TypeVar("T")
@@ -1934,3 +1971,157 @@ q1 = Node[str]("Hello")
 
 print(a1211.x)
 print(d1211.x)
+
+
+# Function Overloading
+# 1
+@overload
+def add21(x: int, y: int) -> int:
+    ...
+
+
+@overload
+def add21(x: float, y: float) -> float:
+    ...
+
+
+@overload
+def add21(x: str, y: str) -> str:
+    ...
+
+
+def add21(
+    x: Union[int, float, str], y: Union[int, float, str]
+) -> Union[int, float, str]:
+    if isinstance(x, int) and isinstance(y, int):
+        return x + y
+    elif isinstance(x, float) and isinstance(y, float):
+        return x + y
+    elif isinstance(x, str) and isinstance(y, str):
+        return x + y
+    else:
+        raise TypeError("Invalid argument types!")
+
+
+# Usage examples
+result1 = add21(1, 2)  # Should return 3
+result2 = add21(1.5, 2.5)  # Should return 4.0
+result3 = add21("Hello, ", "world!")  # Should return "Hello, world!"
+
+print(result1)
+print(result2)
+print(result3)
+
+
+# Method Overloading
+# 1
+class Adder:
+    @overload
+    def add(self, x: int, y: int) -> int:
+        ...
+
+    @overload
+    def add(self, x: float, y: float) -> float:
+        ...
+
+    @overload
+    def add(self, x: str, y: str) -> str:
+        ...
+
+    def add(
+        self, x: Union[int, float, str], y: Union[int, float, str]
+    ) -> Union[int, float, str]:
+        if isinstance(x, int) and isinstance(y, int):
+            return x + y
+        elif isinstance(x, float) and isinstance(y, float):
+            return x + y
+        elif isinstance(x, str) and isinstance(y, str):
+            return x + y
+        else:
+            raise TypeError("Invalid argument types!")
+
+
+# Usage examples
+adder = Adder()
+result1 = adder.add(1, 2)  # Should return 3
+result2 = adder.add(1.5, 2.5)  # Should return 4.0
+result3 = adder.add("Hello, ", "world!")  # Should return "Hello, world!"
+
+print(result1)
+print(result2)
+print(result3)
+
+
+# Overridding
+# 1
+class Animal:
+    def eating(self, food: str) -> None:  # same method
+        print(f"Animal is eating {food}")
+
+
+class Bird(Animal):
+    def eating(self, food: str) -> None:
+        print(f"Bird is eating {food}")
+
+
+bird: Bird = Bird()
+bird.eating("bread")
+
+animal: Animal = Animal()
+animal.eating("grass")
+
+# Polymorphism means many forms
+animal1: Animal = Bird()  # run time it will decide which object method it will be run
+animal1.eating("grass")
+print(type(animal1))
+
+
+# Static Method and Static variable(class variable)
+# 1
+class MathOperations:
+    counter: int = 100
+    organization: str = "PIAIC"
+
+    @staticmethod
+    def add(x: int, y: int) -> int:
+        """Add two numbers."""
+        return x + y
+
+    @staticmethod
+    def multiply(x: int, y: int) -> int:
+        """Multiply two numbers."""
+        return x * y
+
+
+# Using the static methods
+result_add = MathOperations.add(10, 20)
+result_multiply = MathOperations.multiply(10, 20)
+
+print("Addition:", result_add)
+print("Multiplication:", result_multiply)
+
+print("Static variable or Class variable", MathOperations.organization)
+
+# Everything is an object
+
+
+class Human:
+    def eating(self, food: str) -> None:
+        print(f"Human is eating {food}")
+
+
+obj121: Human = Human()
+obj121.eating("Biryani")
+print(dir(obj121))
+
+
+class Human1(object):
+    def eating(self, food: str) -> None:
+        print(f"Human is eating {food}")
+
+
+print(dir(object))
+
+obj211: Human1 = Human1()
+obj211.eating("Biryani")
+print(dir(obj211))

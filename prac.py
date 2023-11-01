@@ -1,27 +1,20 @@
-from typing import TypeVar, Generic
-
-T = TypeVar("T")
-
-
-class Node(Generic[T]):
-    x: T
-
-    def __init__(self, x: T) -> None:
-        self.x = x
+class Human:
+    def eating(self, food: str) -> None:
+        print(f"Human is eating {food}")
 
 
-x1 = Node("")  # Inferred type is Node[str]
-y1 = Node(0)  # Inferred type is Node[int]
-z1 = Node(True)  # Inferred type is Node[Any]
+obj121: Human = Human()
+obj121.eating("Biryani")
+print(dir(obj121))
 
-a122 = Node[int](0)
-b12 = Node[str]("a")
-b121 = Node[bool](False)
-a1211 = Node[tuple[int, int, int]]((1, 2, 3))
-d1211 = Node[list[int]]([1, 2, 3])
 
-p1 = Node[int](0)
-q1 = Node[str]("Hello")
+class Human1(object):
+    def eating(self, food: str) -> None:
+        print(f"Human is eating {food}")
 
-print(a1211.x)
-print(d1211.x)
+
+print(dir(object))
+
+obj211: Human1 = Human1()
+obj211.eating("Biryani")
+print(dir(obj211))
