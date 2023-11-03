@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import PyPDF2
 from typing import TypeVar, Generic
+from abc import ABC, abstractmethod
 
 # variables
 name: str = "My name is 'salman"
@@ -2125,3 +2126,163 @@ print(dir(object))
 obj211: Human1 = Human1()
 obj211.eating("Biryani")
 print(dir(obj211))
+
+
+# Callable
+# 1
+class PowerFactory:
+    def __init__(self, exponent=2):
+        self.exponent = exponent
+
+    def __call__(self, base):
+        return base**self.exponent
+
+
+a221: PowerFactory = PowerFactory()
+print(a221.exponent)
+print(a221(3))
+
+
+# 2
+class CumulativeAverager:
+    def __init__(self):
+        self.data = []
+
+    def __call__(self, new_value):
+        self.data.append(new_value)
+        print(self.data)
+        return sum(self.data) / len(self.data)
+
+
+stream_average = CumulativeAverager()
+
+print(stream_average(12))  # data = [12] (12/1)
+
+print(stream_average(13))  # data = [12,13] (12+13/2)
+
+print(stream_average(11))  #
+
+print(stream_average(10))
+
+print(stream_average.data)
+
+
+# Data Access Modifier
+# 1
+class Piaic:
+    def __init__(self) -> None:
+        # self.name                             public
+        self.piaic_helpline: str = "0800"  #
+        # self._name                             protected
+        self._total_expense: int = 6000000  #
+        # __ = dundder
+        # self.__name                             private
+        self.__test_announcement: str = "5 Nov 2023"
+
+
+class A3(Piaic):
+    def __init__(self) -> None:
+        super().__init__()
+
+
+isfhan: Piaic = Piaic()
+print(isfhan.piaic_helpline)
+print(isfhan._total_expense)
+# print(isfhan._Piaic__test_announcement) access private variable
+
+isfhan.piaic_helpline = "0300"
+isfhan._total_expense = 4000
+print(isfhan.piaic_helpline)
+print(isfhan._total_expense)
+isfhan.__test_announcement = "2300"
+print(isfhan.__test_announcement)
+
+
+Ali: A3 = A3()
+print(Ali.piaic_helpline)
+print(Ali._total_expense)
+# print(Ali.__test_announcement)
+
+
+# Str method in class
+# 1
+class Teacher200:
+    def __init__(self, name) -> None:
+        self.name: str = name
+
+
+sir_zia: Teacher200 = Teacher200("sir zia")
+
+print(sir_zia)
+
+
+# 2
+class Teacher300:
+    def __init__(self, name) -> None:
+        self.name: str = name
+
+    def __str__(self) -> str:
+        return f"Teacher name is {self.name}"
+
+
+sir_zia1: Teacher300 = Teacher300("sir zia")
+
+print(sir_zia1)
+
+# Abstract Class
+# 1 Cannot create instance of abstract class
+# class Animal21(ABC):
+#     @abstractmethod
+#     def __init__(self) -> None:
+#         super().__init__()
+#         self.living_thing: bool = True
+
+
+# isfahan: Animal21 = Animal21()
+
+
+# 2
+class Animal11(ABC):
+    @abstractmethod
+    def __init__(self) -> None:
+        super().__init__()
+        self.living_thing: bool = True
+
+    @abstractmethod
+    def eat(self, food: str):
+        ...
+
+
+class Cat(Animal11):
+    def __init__(self) -> None:
+        super().__init__()  # parent
+
+    def eat(self, food: str):
+        return f"Cat is eating {food}"
+
+
+isfahan: Cat = Cat()
+
+
+print(isfahan.living_thing)
+print(isfahan.eat("Mouse"))
+
+# Duck Typing
+class Duck:
+    def quack(self):
+        return "Quack!"
+
+
+class Person:
+    def quack(self):
+        return "I'm Quacking Like a Duck!"
+
+
+def in_the_forest(cake):
+    print(cake.quack())
+
+
+donald: Duck = Duck()
+john: Person = Person()
+in_the_forest(donald)
+in_the_forest(john)

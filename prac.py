@@ -1,20 +1,19 @@
-class Human:
-    def eating(self, food: str) -> None:
-        print(f"Human is eating {food}")
+# Duck Typing
+class Duck:
+    def quack(self):
+        return "Quack!"
 
 
-obj121: Human = Human()
-obj121.eating("Biryani")
-print(dir(obj121))
+class Person:
+    def quack(self):
+        return "I'm Quacking Like a Duck!"
 
 
-class Human1(object):
-    def eating(self, food: str) -> None:
-        print(f"Human is eating {food}")
+def in_the_forest(cake):
+    print(cake.quack())
 
 
-print(dir(object))
-
-obj211: Human1 = Human1()
-obj211.eating("Biryani")
-print(dir(obj211))
+donald: Duck = Duck()
+john: Person = Person()
+in_the_forest(donald)
+in_the_forest(john)
