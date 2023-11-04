@@ -10,6 +10,9 @@ import matplotlib.image as mpimg
 import PyPDF2
 from typing import TypeVar, Generic
 from abc import ABC, abstractmethod
+import numpy as np
+from nptyping import NDArray, Shape, UInt64
+from nptyping import Bool
 
 # variables
 name: str = "My name is 'salman"
@@ -2267,6 +2270,7 @@ isfahan: Cat = Cat()
 print(isfahan.living_thing)
 print(isfahan.eat("Mouse"))
 
+
 # Duck Typing
 class Duck:
     def quack(self):
@@ -2286,3 +2290,151 @@ donald: Duck = Duck()
 john: Person = Person()
 in_the_forest(donald)
 in_the_forest(john)
+
+# Scalar Type
+# 1
+a99: np.ndarray = np.array(1000)  # object to store
+
+print(a99)  # prints
+print(a99.shape)  # prints the shape of the object () = 0 -Denormalized
+print(a99.dtype)  # prints the dtype of the object
+print(type(a99))
+print(a99.ndim)  # prints the number of dimensions
+print(a99.size)  # prints the size of the object
+print(a99.itemsize)  # prints the itemsize of the object
+
+# Vector Type
+# 1
+a101: np.ndarray = np.array([1, 2, 3, 4])  # object to store [1,2,3,4] = vector
+
+print(f" object {a101}")  # prints
+print(
+    f"objec shape {a101.shape}"
+)  # prints the shape of the object () = 0 -Denormalized
+print(f" Object type {a101.dtype}")  # prints the dtype of the object
+print(f"Object type with global function {type(a101)}")  # prints the dtype of the
+print(f"Number of dimension {a101.ndim}")  # prints the number of dimensions
+print(f"Total items in Array : {a101.size}")  # prints the size of the object
+print(f"{a101.itemsize}")  # prints the itemsize of the object
+
+# Matrix Type
+# 1
+
+data65 = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
+
+a211: np.ndarray = np.array(data65)  # object to store [1,2,3,4] = vector
+
+print(f" object {a211}")  # prints
+print(
+    f"objec shape {a211.shape}"
+)  # prints the shape of the object () = 0 -Denormalized
+print(f" Object type {a211.dtype}")  # prints the dtype of the object
+print(f"Object type with global function {type(a211)}")  # prints the dtype of the
+print(f"Number of dimension {a211.ndim}")  # prints the number of dimensions
+print(f"Total items in Array : {a211.size}")  # prints the size of the object
+print(f"{a211.itemsize}")  # prints the itemsize of the object
+
+# Numpy with NDArray typing support
+# 1
+data322: NDArray[Shape["10"], Any] = np.arange(1, 11)
+
+print(data322)
+print(data322 + 5)  # addition operation
+
+# 2
+ndata: NDArray[Shape["20"], Any] = np.arange(1, 21)
+print(ndata)
+print(ndata[5:11])
+ndata[5:11] = 1000
+print(ndata)
+
+# Numpy 1d functions
+# 1
+state_bank: NDArray[Shape["10"], Any] = np.array([1, 7, 8, 10])
+# [1,      7,      8,     10]
+# [True,  False, False, True]
+# variable[[True,  False, False, True]]
+# [1,10]
+select: NDArray[Shape["10"], Bool] = np.array([True, False, False, True])
+
+state_bank[select]
+
+# 2
+state_bank1: NDArray[Shape["4"], Any] = np.array([1, 7, 8, 10])
+print(state_bank1 % 2 == 0)
+
+# 3
+state_bank2: NDArray[Shape["10"], Any] = np.array([1, 7, 8, 10])
+
+state_bank21: NDArray[Shape["100"], Any] = np.random.randint(1, 100, 20)
+
+print(state_bank2)
+print(state_bank21)
+print(np.in1d(state_bank2, state_bank21))
+
+# 4
+x12: NDArray[Shape["5"], Any] = np.array([1, 3, 4, 5, 7])
+y12: NDArray[Shape["5"], Any] = np.array([6, 3, 2, 5, 100])
+
+print(x12)
+print(y12)
+print(np.where(x12 > y12, x12, y12))
+
+# Create Numpy arrays
+# 1
+ar: NDArray[Shape["Size, Size"], Any] = np.array([[1, 2, 3], [4, 5, 6]])
+print(ar)
+
+ar1: NDArray[Shape["Size, Size"], Any] = np.array([[1, 2], [4, 5]])
+print(ar1)
+
+ar2: NDArray[Shape["Size, Size"], Any] = np.array([["A"], ["B"]])
+print(ar2)
+
+# 2
+ab1: NDArray[Shape["*, *"], Any] = np.array([[1, 2, 3], [4, 5, 6]])
+print(ab1)
+
+ab2: NDArray[Shape["*, *"], Any] = np.array([[1, 2], [4, 5]])
+print(ab2)
+
+ab3: NDArray[Shape["*, *"], Any] = np.array([["A"], ["B"]])
+print(ab3)
+
+# Create any dimension array
+# 1
+ac1: NDArray[Shape["Size"], Any] = np.arange(1, 5)
+print(ac1)
+ac2: NDArray[Shape["Size"], Any] = np.arange(1, 10)
+print(ac2)
+
+# 2
+av1: NDArray[Shape["Size, Size"], Any] = np.arange(3 * 3).reshape(3, 3)
+print(av1)
+av2: NDArray[Shape["Size, Size"], Any] = np.arange(5 * 3).reshape(5, 3)
+print(av2)
+
+# 3
+a65: NDArray[Shape["Size, Size, Size"], Any] = np.arange(2 * 3 * 3).reshape(2, 3, 3)
+print(a65)
+print("=======")
+a64: NDArray[Shape["Size, Size, Size"], Any] = np.arange(5 * 2 * 2).reshape(5, 2, 2)
+print(a64)
+
+# 4
+print(np.asarray([1, 2, 3]))
+print(np.zeros(10))
+print(np.zeros((2, 2)))
+print(np.ones((2, 2)))
+
+ndata1: NDArray[Shape["20"], Any] = np.arange(1, 21)
+
+print(ndata1)
+print(ndata1.min())
+print(ndata1.max())
+print(ndata1.argmax())
+print(ndata1.argmin)
+print(ndata1.mean())
+print(ndata1.std())
+print(ndata1.sum())
+print(ndata1.cumsum())
