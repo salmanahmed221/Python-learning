@@ -13,6 +13,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 from nptyping import NDArray, Shape, UInt64
 from nptyping import Bool
+import pandera as pa
 
 # variables
 name: str = "My name is 'salman"
@@ -2438,3 +2439,145 @@ print(ndata1.mean())
 print(ndata1.std())
 print(ndata1.sum())
 print(ndata1.cumsum())
+
+# Pandas core components
+# Series types
+# DataFrame types
+
+# list we can use for creating series
+
+s1: pd.Series = pd.Series([1, 2, 3, 4, 5])
+print(s1)
+
+# Tuple we can use for creating series
+
+s2: pd.Series = pd.Series((1, 2, 3, 4, 5))
+print(s2)
+
+# Dictionary we can use for creating series
+
+s3: pd.Series = pd.Series(
+    {
+        "a": 10,
+        "b": 20,
+        "c": 30,
+        "d": 40,
+        "e": 50,
+        "f": 60,
+        "g": 70,
+    }
+)
+print(s3)
+
+# Create series through values and indexes
+values: list[int] = [1, 2, 3, 4, 5]
+index1: list[str] = ["a", "b", "c", "d", "e"]
+
+s4: pd.Series = pd.Series(values, index=index1)
+print(s4)
+
+# Create series through values of two dimenstion list and indexes
+values1: list[int] = [1, 2, 3, 4, 5]
+
+index21: list[list[str]] = [["a1", "a1", "a1", "b1", "b1"], ["a", "b", "c", "d", "e"]]
+
+s5: pd.Series = pd.Series(values1, index=index21, name="test_table")
+print(s5)
+
+# DataFrame
+# 1
+s6: pd.Series = pd.Series([1, 2, 3, 4, 5], name="student id")
+s7: pd.Series = pd.Series([10, 20, 30, 40, 50], name="score")
+s8: pd.Series = pd.Series(
+    ["Hamza", "Ali", "Junaid", "Rashid", "Konain"], name="student name"
+)
+
+
+df12: pd.DataFrame = pd.DataFrame({"student id": s6, "score": s7, "student name": s8})
+print(df12)
+
+# 2
+s9: pd.Series = pd.Series([1, 2, 3, 4, 5], name="student id")
+s10: pd.Series = pd.Series([10, 20, 30, 40, 50], name="score")
+s11: pd.Series = pd.Series(
+    ["Hamza", "Ali", "Junaid", "Rashid", "Konain"], name="student name"
+)
+
+
+df11: pd.DataFrame = pd.concat([s9, s10, s11], axis=1)
+print(df11)
+
+# 3
+data655: list[list[int]] = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+df21: pd.DataFrame = pd.DataFrame(data655)
+print(df21)
+
+# 4
+data666: list[list[int]] = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+df0: pd.DataFrame = pd.DataFrame(data666, columns=["A", "B", "C"])
+print(df0)
+
+# 5
+data232: list[list[int]] = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+df112: pd.DataFrame = pd.DataFrame(
+    data232, columns=["A", "B", "C"], index=["x", "y", "z"]
+)
+print(df112)
+print(df112.columns)
+print(df112.index)
+print(df112.values)
+
+# Sicling and indexing
+# series_variable[index]
+# dataFrame
+# loc
+# iloc
+# at
+# iat
+
+# 1
+f1: pd.Series = pd.Series([1, 2, 3, 4, 5])
+print(f1)
+print("Applying slicing")
+print(f1[1])  # index
+print(f1[2])
+print(f1[3])
+
+# 2
+f2: pd.Series = pd.Series([1, 2, 3, 4, 5])
+print(f2)
+print("Applying slicing")
+print(f2[1:4])  # index
+
+# 3
+f3: pd.Series = pd.Series([1, 2, 3, 4, 5])
+print(f3)
+print("Applying sliding")
+print(f3.iloc[1:4])  # index location (numbers) same as numpy silcing
+
+# 4
+f4: pd.Series = pd.Series([1, 2, 3, 4, 5])
+print(f4)
+print("Applying sliding")
+print(f4.iloc[1:4])  # index location (numbers) same as numpy silcing
+
+# 5
+# f5: pd.Series = pd.Series([1, 2, 3, 4, 5], index=["a", "b", "c", "d", "e"])
+# print(f5)
+# print("Applying sliding")
+# print(f5.loc["a":"d"])  # index location (label) end included
+
+# 6
+f6: pd.Series = pd.Series([1, 2, 3, 4, 5], index=["a", "b", "c", "d", "e"])
+print(f6)
+print("Applying sliding")
+print(f6.iat[1])  # index location (number) extract one cell value and you can update it
+
+# 7
+f7 : pd.Series = pd.Series([1,2,3,4,5], index=['a', 'b', 'c', 'd','e'])
+print(f7)
+print("Applying sliding")
+print(f7.at["d"])# index location (label) extract one cell value and you can update it
