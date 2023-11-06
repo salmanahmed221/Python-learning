@@ -11,7 +11,7 @@ import PyPDF2
 from typing import TypeVar, Generic
 from abc import ABC, abstractmethod
 import numpy as np
-from nptyping import NDArray, Shape, UInt64
+from nptyping import NDArray, Shape, UInt64, Int64
 from nptyping import Bool
 import pandera as pa
 
@@ -2577,7 +2577,247 @@ print("Applying sliding")
 print(f6.iat[1])  # index location (number) extract one cell value and you can update it
 
 # 7
-f7 : pd.Series = pd.Series([1,2,3,4,5], index=['a', 'b', 'c', 'd','e'])
+f7: pd.Series = pd.Series([1, 2, 3, 4, 5], index=["a", "b", "c", "d", "e"])
 print(f7)
 print("Applying sliding")
-print(f7.at["d"])# index location (label) extract one cell value and you can update it
+print(f7.at["d"])  # index location (label) extract one cell value and you can update it
+
+# DataFrame
+# add new column
+
+# one column
+# two or more columns
+# delete column
+
+# change data type of columns
+
+# map
+
+# apply
+
+# on one column
+# more than one column
+# concat
+
+# axis
+# axis = 0 (top to bottom)
+# axis = 1 (left to right)
+# describe dataframe
+
+# df.info() # total index, columns names and data type, total fill cells
+# df.describe() # mean, std, min # statistical properties | apply only numeric columns
+# df.head() # first 5 rows
+# df.tail() # last 5 rows
+# dataframe.sample() # select samples
+
+# 1
+total: int = 10000
+g1: NDArray[Shape[str(total) + "5"], Int64] = np.random.randint(80, 100, (total, 5))
+ss1: pd.DataFrame = pd.DataFrame(g1, columns=["s1", "s2", "s3", "s4", "s5"])
+
+g2: NDArray[Shape[str(total) + "5"], Int64] = np.random.randint(70, 79, (total, 5))
+ss2: pd.DataFrame = pd.DataFrame(g2, columns=["s1", "s2", "s3", "s4", "s5"])
+
+g3: NDArray[Shape[str(total) + "5"], Int64] = np.random.randint(60, 69, (total, 5))
+ss3: pd.DataFrame = pd.DataFrame(g3, columns=["s1", "s2", "s3", "s4", "s5"])
+
+g4: NDArray[Shape[str(total) + "5"], Int64] = np.random.randint(50, 59, (total, 5))
+ss4: pd.DataFrame = pd.DataFrame(g4, columns=["s1", "s2", "s3", "s4", "s5"])
+
+g5: NDArray[Shape[str(total) + "5"], Int64] = np.random.randint(40, 49, (total, 5))
+ss5: pd.DataFrame = pd.DataFrame(g5, columns=["s1", "s2", "s3", "s4", "s5"])
+
+g6: NDArray[Shape[str(total) + "5"], Int64] = np.random.randint(33, 39, (total, 5))
+ss6: pd.DataFrame = pd.DataFrame(g6, columns=["s1", "s2", "s3", "s4", "s5"])
+
+g7: NDArray[Shape[str(total) + "5"], Int64] = np.random.randint(0, 32, (total, 5))
+ss7: pd.DataFrame = pd.DataFrame(g7, columns=["s1", "s2", "s3", "s4", "s5"])
+
+
+print(len(ss1))
+print(len(ss2))
+print(len(ss3))
+print(len(ss4))
+print(len(ss5))
+print(len(ss6))
+print(len(ss7))
+
+# 2
+df3: pd.DataFrame = pd.concat([ss1, ss2, ss3, ss4, ss5, ss6, ss7]).reset_index(
+    drop=True
+)
+
+df3.info()
+print("================================================================")
+print(df3.describe())
+print("================================================================")
+print(df3.head())  # .head(n=60)
+print("================================================================")
+print(df3.tail())
+
+# Apply operations on columns
+# Extract one column from DataFrame
+# dataframe['column']
+# add new column
+# get column with space between columns text
+# dataframe.column
+# not add new column
+# not get column with space between columns text
+# Extract two or more columns from DataFrame
+# dataframe[['column1', 'column2']]
+# pass list into DataFrame
+
+# 1
+print(df3.head())
+print(df3["s5"])
+print(df3.s5)
+print(df3[["s1", "s5", "s3", "s1"]])
+
+# Add new column
+# Addition operation on column
+
+# 1
+print(df3.head())
+
+df3["Total"] = 500  # add new column
+df3["Total"] = 300  # update column values
+df3["Total"] = 500  # add new column
+del df3["Total"]  #  delete column
+print(df3)
+
+# 2
+# df3.Total = 500  # not add new column
+df3["Total"] = 500  # add new column
+df3.Total = 300  # update column values
+# del df3.Total #  not remove old c
+
+print(df3)
+
+# Sum of columns
+# 1
+print(df3.head())
+print(89 + 89 + 86 + 86 + 92)
+df3["s1"] + df3["s2"] + df3["s3"] + df3["s4"] + df3["s5"]
+
+# 2
+df3["obtained"] = df3["s1"] + df3["s2"] + df3["s3"] + df3["s4"] + df3["s5"]
+df3["percentage"] = df3["obtained"] / df3["Total"] * 100
+print(df3)
+
+
+# apply custom function on columns(SeriesData)
+def grade22(per: int) -> str:
+    if per >= 80:
+        return "A+"
+    elif per >= 70:
+        return "A"
+    elif per >= 60:
+        return "B"
+    elif per >= 50:
+        return "C"
+    elif per >= 40:
+        return "D"
+    elif per >= 33:
+        return "E"
+    else:
+        return "F"
+
+
+grade22(82)
+
+df3.head()
+df3["percentage"].apply(grade22)
+df3["Grade"] = df3["percentage"].apply(grade22)
+print(df3)
+
+# apply custom function on multiple columns and return one column or more than one
+# loc
+# dataframe[rows,columns]
+# excact labels value
+# iloc
+# dataframe[rows,columns]
+# numerical indexing value
+# at
+# cell value with exact label
+# iat
+# cell value with numerical index
+
+# 1
+# print(df3[0:10])  # direct sicling apply on  rows index
+# print(df3.iloc[1:11, 1:3])  # numpy sicling apply on columns and rows index
+# print(df3.loc[1:11, "s1":"s3"])  # direct sicling apply on columns and rows labels or end include
+# print(df3.head())
+# print(df3.at[4, "s1"])
+# print(df3.iat[4, 0])
+
+
+# Apply custom function on multiple columns and return one column
+# 1
+def fn_obtained(s1: int, s2: int, s3: int, s4: int, s5: int) -> int:
+    return s1 + s2 + s3 + s4 + s5
+
+
+df3["obtained"] = df3[["s1", "s2", "s3", "s4", "s5"]].apply(
+    lambda x: fn_obtained(*x), axis=1
+)
+print(df3)
+
+
+# 2
+def fn_obtained2(
+    s1: int, s2: int, s3: int, s4: int, s5: int
+) -> tuple[int, int, float, str]:
+    total: int = 500
+    obtained: int = s1 + s2 + s3 + s4 + s5
+    per: float = obtained / total * 100
+    grade: str = ""
+    if per >= 80:
+        grade = "A+"
+    elif per >= 70:
+        grade = "A"
+    elif per >= 60:
+        grade = "B"
+    elif per >= 50:
+        grade = "C"
+    elif per >= 40:
+        grade = "D"
+    elif per >= 33:
+        grade = "E"
+    else:
+        grade = "F"
+    return total, obtained, per, grade
+
+
+df3[["Total", "obtained", "percentage", "Grade"]] = df3[
+    ["s1", "s2", "s3", "s4", "s5"]
+].apply(lambda x: fn_obtained2(*x), axis=1, result_type="expand")
+print(df3)
+
+# Map function for remarks
+# 1
+remark: dict[str, str] = {
+    "A+": "Excellent",
+    "A": "Very Good",
+    "B": "Good",
+    "C": "Fair",
+    "D": "Poor",
+    "E": "Very Poor",
+    "F": "Fail",
+}
+
+df3["Remark"] = df3["Grade"].map(remark)
+print(df3)
+
+# Type casting on column names
+# astype
+# apply
+# datatype name (str, int,list)
+# function name (cell_value): transformation in function body
+
+# 1
+df3["s1"] = df3["s1"].astype(np.int64)
+df3.info()
+
+# 2
+# df3["s2"] = df3["s2"].apply(np.int64)
+# df3.info()
