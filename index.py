@@ -5,6 +5,7 @@ import sys
 from typing import Callable
 from typing import Iterator
 from typing import TextIO
+from pandera.typing import Series
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import PyPDF2
@@ -14,6 +15,8 @@ import numpy as np
 from nptyping import NDArray, Shape, UInt64, Int64
 from nptyping import Bool
 import pandera as pa
+from datetime import datetime, timedelta
+
 
 # variables
 name: str = "My name is 'salman"
@@ -2821,3 +2824,555 @@ df3.info()
 # 2
 # df3["s2"] = df3["s2"].apply(np.int64)
 # df3.info()
+
+# Pandas
+# filtering
+# sorting
+# usefull methods
+# groupby
+# merge
+
+# Define the data as a list of dictionaries with 10 student records
+students_data43 = [
+    {
+        "roll_no": 1,
+        "name": "Alice",
+        "father": "Bob",
+        "course": "Physics",
+        "date_of_admission": "2023-01-10",
+        "fee": 10000,
+    },
+    {
+        "roll_no": 2,
+        "name": "Brian",
+        "father": "Steve",
+        "course": "Chemistry",
+        "date_of_admission": "2023-02-12",
+        "fee": 11000,
+    },
+    {
+        "roll_no": 3,
+        "name": "Chloe",
+        "father": "Tim",
+        "course": "Biology",
+        "date_of_admission": "2023-03-14",
+        "fee": 12000,
+    },
+    {
+        "roll_no": 4,
+        "name": "David",
+        "father": "Rick",
+        "course": "Mathematics",
+        "date_of_admission": "2023-04-10",
+        "fee": 13000,
+    },
+    {
+        "roll_no": 5,
+        "name": "Eva",
+        "father": "John",
+        "course": "Computer Science",
+        "date_of_admission": "2023-05-16",
+        "fee": 14000,
+    },
+    {
+        "roll_no": 6,
+        "name": "Frank",
+        "father": "Tom",
+        "course": "Economics",
+        "date_of_admission": "2023-06-21",
+        "fee": 15000,
+    },
+    {
+        "roll_no": 7,
+        "name": "Grace",
+        "father": "Harry",
+        "course": "History",
+        "date_of_admission": "2023-07-25",
+        "fee": 16000,
+    },
+    {
+        "roll_no": 8,
+        "name": "Henry",
+        "father": "Charles",
+        "course": "Geography",
+        "date_of_admission": "2023-08-17",
+        "fee": 17000,
+    },
+    {
+        "roll_no": 9,
+        "name": "Isabel",
+        "father": "Oliver",
+        "course": "English",
+        "date_of_admission": "2023-09-10",
+        "fee": 18000,
+    },
+    {
+        "roll_no": 10,
+        "name": "Jack",
+        "father": "Noah",
+        "course": "Art",
+        "date_of_admission": "2023-10-05",
+        "fee": 19000,
+    },
+]
+
+# Create the DataFrame
+students_df: pd.DataFrame = pd.DataFrame(students_data43)
+
+# Convert 'date_of_admission' to datetime
+students_df["date_of_admission"] = pd.to_datetime(students_df["date_of_admission"])
+
+# Show the DataFrame
+print(students_df)
+
+# Verify the data types
+students_df.info()
+
+# Apply the filter or filter functions on dataframe
+print(students_df.head(1))
+print(students_df["course"].value_counts())
+students_df.course.value_counts(dropna=False)  # also counts null cells values
+students_df.course.value_counts(
+    dropna=False, normalize=True
+)  # also counts null cells values and gives in percentage
+print(
+    students_df.course.value_counts(dropna=False, normalize=True) * 100
+)  # also counts null cells values and gives in percentage
+
+# 2
+print(students_df)
+
+# Set a seed for reproducibility
+np.random.seed(0)
+
+# Define the number of transactions
+num_transactions = 1000
+
+# Generate random dates within the current year
+current_year = datetime.now().year
+start_date = datetime(current_year, 1, 1)
+end_date = datetime.now()
+
+# Generate a list of random dates within the year
+random_dates = [
+    start_date + timedelta(days=np.random.randint(0, (end_date - start_date).days))
+    for _ in range(num_transactions)
+]
+
+# Generate a list of random fee amounts
+random_fees = np.random.randint(low=1, high=5000, size=num_transactions)
+
+# Create the DataFrame
+fee_transactions = pd.DataFrame({"date": random_dates, "fee": random_fees})
+
+# Sort by date for readability
+fee_transactions.sort_values("date", inplace=True)
+
+# Reset index after sorting
+fee_transactions.reset_index(drop=True, inplace=True)
+
+print(pd.cut(fee_transactions.fee, [1, 500, 1000, 3000, 4000, 5000]))
+print(pd.cut(fee_transactions.fee, [1, 500, 1000, 3000, 4000, 5000]).value_counts())
+print(
+    pd.cut(fee_transactions.fee, [1, 500, 1000, 3000, 4000, 5000]).value_counts(
+        normalize=True
+    )
+    * 100
+)
+print(
+    pd.qcut(fee_transactions.fee, [0, 0.3, 0.5, 0.7, 0.9, 1]).value_counts()
+)  # qcutt is used to give value in percentage
+print(
+    pd.qcut(fee_transactions.fee, [0, 0.3, 0.5, 0.7, 0.9, 1]).value_counts(
+        normalize=True
+    )
+    * 100
+)
+
+# filter on columns
+# & , | , ~
+# Syntax:
+
+# dataframe[(dataframe.column1=='value1') & (dataframe.column2=='value2)]
+# string columns
+# numeric columns
+# datetime columns
+
+
+# Define the schema using SchemaModel
+# Data for 10 students
+students_data09 = [
+    {
+        "roll_no": 1,
+        "name": "Alice",
+        "father": "Bob",
+        "course": "Physics",
+        "date_of_admission": "2023-01-10",
+        "fee": 10000,
+    },
+    {
+        "roll_no": 2,
+        "name": "Brian",
+        "father": "Steve",
+        "course": "Chemistry",
+        "date_of_admission": "2023-02-12",
+        "fee": 11000,
+    },
+    {
+        "roll_no": 3,
+        "name": "Chloe",
+        "father": "Tim",
+        "course": "Biology",
+        "date_of_admission": "2023-03-14",
+        "fee": 12000,
+    },
+    {
+        "roll_no": 4,
+        "name": "David",
+        "father": "Rick",
+        "course": "physics",
+        "date_of_admission": "2023-04-10",
+        "fee": 13000,
+    },
+    {
+        "roll_no": 5,
+        "name": "Eva",
+        "father": "John",
+        "course": "Physics",
+        "date_of_admission": "2023-05-16",
+        "fee": 14000,
+    },
+    {
+        "roll_no": 6,
+        "name": "Frank",
+        "father": "Tom",
+        "course": "Economics",
+        "date_of_admission": "2023-06-21",
+        "fee": 15000,
+    },
+    {
+        "roll_no": 7,
+        "name": "Grace",
+        "father": "Harry",
+        "course": "History",
+        "date_of_admission": "2023-07-25",
+        "fee": 16000,
+    },
+    {
+        "roll_no": 8,
+        "name": "Henry",
+        "father": "Charles",
+        "course": "Geography",
+        "date_of_admission": "2023-08-17",
+        "fee": 17000,
+    },
+    {
+        "roll_no": 9,
+        "name": "Isabel",
+        "father": "Oliver",
+        "course": "English",
+        "date_of_admission": "2023-09-10",
+        "fee": 18000,
+    },
+    {
+        "roll_no": 10,
+        "name": "Jack",
+        "father": "Noah",
+        "course": "Art",
+        "date_of_admission": "2023-10-05",
+        "fee": 19000,
+    },
+]
+
+# Create the DataFrame
+students_df = pd.DataFrame(students_data09)
+
+# Convert 'date_of_admission' to datetime
+students_df["date_of_admission"] = pd.to_datetime(students_df["date_of_admission"])
+
+# Validate the DataFrame
+print(students_df)
+print(students_df["course"] == "Physics")
+print(students_df[students_df["course"] == "Physics"])
+print(students_df["course"].str.lower() == "physics")
+print(students_df[students_df["course"].str.lower() == "physics"])
+print(students_df["course"].str.lower().str.contains("cs"))
+print(students_df[students_df["course"].str.lower().str.contains("cs")])
+print(
+    students_df[
+        (students_df["course"].str.lower().str.contains("cs"))
+        & (students_df["fee"] >= 14000)
+    ]
+)
+print(
+    students_df["course"].str.lower().str.contains("cs")
+    & students_df["course"].str.lower().str.contains("r")
+)
+print(
+    students_df["course"].str.lower().str.contains("cs")
+    | students_df["course"].str.lower().str.contains("r")
+)
+print(
+    students_df[
+        students_df["course"].str.lower().str.contains("cs")
+        | students_df["course"].str.lower().str.contains("r")
+    ]
+)
+
+# Data
+students_data07 = [
+    {
+        "roll_no": 1,
+        "name": "Alice",
+        "father": "Bob",
+        "course": "Physics",
+        "date_of_admission": "2023-01-10",
+        "fee": 10000,
+    },
+    {
+        "roll_no": 2,
+        "name": "Brian",
+        "father": "Steve",
+        "course": "Chemistry",
+        "date_of_admission": "2023-02-12",
+        "fee": 11000,
+    },
+    {
+        "roll_no": 3,
+        "name": "Chloe",
+        "father": "Tim",
+        "course": "Biology",
+        "date_of_admission": "2023-03-14",
+        "fee": 12000,
+    },
+    {
+        "roll_no": 4,
+        "name": "David",
+        "father": "Rick",
+        "course": "physics",
+        "date_of_admission": "2023-04-10",
+        "fee": 13000,
+    },
+    {
+        "roll_no": 5,
+        "name": "Eva",
+        "father": "John",
+        "course": "Physics",
+        "date_of_admission": "2023-05-16",
+        "fee": 14000,
+    },
+    {
+        "roll_no": 6,
+        "name": "Frank",
+        "father": "Tom",
+        "course": "Economics",
+        "date_of_admission": "2023-06-21",
+        "fee": 15000,
+    },
+    {
+        "roll_no": 7,
+        "name": "Grace",
+        "father": "Harry",
+        "course": "History",
+        "date_of_admission": "2023-07-25",
+        "fee": 16000,
+    },
+    {
+        "roll_no": 8,
+        "name": "Henry",
+        "father": "Charles",
+        "course": "Geography",
+        "date_of_admission": "2023-08-17",
+        "fee": 17000,
+    },
+    {
+        "roll_no": 9,
+        "name": "Isabel",
+        "father": "Oliver",
+        "course": "English",
+        "date_of_admission": "2023-09-10",
+        "fee": 18000,
+    },
+    {
+        "roll_no": 10,
+        "name": "Jack",
+        "father": "Noah",
+        "course": "Art",
+        "date_of_admission": "2023-10-05",
+        "fee": 19000,
+    },
+]
+
+# Create the DataFrame
+students_df = pd.DataFrame(students_data07)
+
+# Convert 'date_of_admission' to datetime
+students_df["date_of_admission"] = pd.to_datetime(students_df["date_of_admission"])
+
+print(students_df)
+
+# apply filter on date column
+# dataframe.column.dt
+# dt.strftime
+# dt.strptime
+# In pandas, when you have a datetime column in a DataFrame, you can format the date and time information using the strftime method which allows for flexible formatting by specifying format codes. Each code represents a different element of the date and time. Below are some of the commonly used format codes that you can use with strftime:
+
+# %a - Abbreviated weekday name.
+# %A - Full weekday name.
+# %w - Weekday as a decimal number, where 0 is Sunday and 6 is Saturday.
+# %d - Day of the month as a zero-padded decimal number.
+# %b - Abbreviated month name.
+# %B - Full month name.
+# %m - Month as a zero-padded decimal number.
+# %y - Year without century as a zero-padded decimal number.
+# %Y - Year with century as a decimal number.
+# %H - Hour (24-hour clock) as a zero-padded decimal number.
+# %I - Hour (12-hour clock) as a zero-padded decimal number.
+# %p - Locale’s equivalent of either AM or PM.
+# %M - Minute as a zero-padded decimal number.
+# %S - Second as a zero-padded decimal number.
+# %f - Microsecond as a decimal number, zero-padded on the left.
+# %z - UTC offset in the form ±HHMM[SS[.ffffff]] (empty string if the object is naive).
+# %Z - Time zone name (empty string if the object is naive).
+# %j - Day of the year as a zero-padded decimal number.
+# %U - Week number of the year (Sunday as the first day of the week) as a zero-padded decimal number.
+# %W - Week number of the year (Monday as the first day of the week) as a zero-padded decimal number.
+# %c - Locale’s appropriate date and time representation.
+# %x - Locale’s appropriate date representation.
+# %X - Locale’s appropriate time representation.
+# %G - ISO 8601 year with century representing the year that contains the greater part of the ISO week (%V).
+# %u - ISO 8601 weekday as a decimal number where 1 is Monday.
+# %V - ISO 8601 week number as a decimal number with Monday as the first day of the week.
+# Here's a small example of how to use strftime with a pandas DataFrame:
+
+# import pandas as pd
+
+# # Create a sample DataFrame with datetime column
+# df = pd.DataFrame({
+#     'datetime': pd.date_range(start='2023-01-01', periods=3, freq='D')
+# })
+
+# # Format the 'datetime' column as a string with a specific format
+# df['formatted_date'] = df['datetime'].dt.strftime('%Y-%m-%d %H:%M:%S')
+
+# print(df)
+# The 'formatted_date' column will contain strings representing the dates in the format specified by the strftime method. You can combine any of the symbols above to create the date format string as per your requirements.
+
+print(students_df["date_of_admission"])
+
+# Date methods
+students_df["date_of_admission"].dt.year
+students_df["date_of_admission"].dt.month
+students_df["date_of_admission"].dt.day
+students_df["date_of_admission"].dt.weekday
+students_df["date_of_admission"].dt.day_of_week
+students_df["date_of_admission"].dt.hour
+students_df["date_of_admission"].dt.minute
+students_df["date_of_admission"].dt.second
+students_df["date_of_admission"].dt.microsecond
+students_df["date_of_admission"].dt.tz
+students_df["date_of_admission"].dt.tz_localize
+students_df["date_of_admission"].dt.tz_convert
+students_df["date_of_admission"].dt.tz_localize(None)
+
+# Group by
+# dataframe.groupby(['column1', 'column2'])
+# dataframe.groupby(['column1', 'column2'])[['co1','col2']].aggregate([min,max])
+# dataframe.groupby(['column1', 'column2'])[['co1','col2']].apply(function())
+
+# Data for 10 students
+students_data45 = [
+    {
+        "roll_no": 1,
+        "name": "Alice",
+        "father": "Bob",
+        "course": "Physics",
+        "date_of_admission": "2023-01-10",
+        "fee": 10000,
+    },
+    {
+        "roll_no": 2,
+        "name": "Brian",
+        "father": "Steve",
+        "course": "Chemistry",
+        "date_of_admission": "2023-02-12",
+        "fee": 11000,
+    },
+    {
+        "roll_no": 3,
+        "name": "Chloe",
+        "father": "Tim",
+        "course": "Biology",
+        "date_of_admission": "2023-03-14",
+        "fee": 12000,
+    },
+    {
+        "roll_no": 4,
+        "name": "David",
+        "father": "Rick",
+        "course": "Physics",
+        "date_of_admission": "2023-04-10",
+        "fee": 13000,
+    },
+    {
+        "roll_no": 5,
+        "name": "Eva",
+        "father": "John",
+        "course": "Physics",
+        "date_of_admission": "2023-05-16",
+        "fee": 14000,
+    },
+    {
+        "roll_no": 6,
+        "name": "Frank",
+        "father": "Tom",
+        "course": "Economics",
+        "date_of_admission": "2023-06-21",
+        "fee": 15000,
+    },
+    {
+        "roll_no": 7,
+        "name": "Grace",
+        "father": "Harry",
+        "course": "History",
+        "date_of_admission": "2023-07-25",
+        "fee": 16000,
+    },
+    {
+        "roll_no": 8,
+        "name": "Henry",
+        "father": "Charles",
+        "course": "Geography",
+        "date_of_admission": "2023-08-17",
+        "fee": 17000,
+    },
+    {
+        "roll_no": 9,
+        "name": "Isabel",
+        "father": "Oliver",
+        "course": "English",
+        "date_of_admission": "2023-09-10",
+        "fee": 18000,
+    },
+    {
+        "roll_no": 10,
+        "name": "Jack",
+        "father": "Noah",
+        "course": "Art",
+        "date_of_admission": "2023-10-05",
+        "fee": 19000,
+    },
+]
+
+# Create the DataFrame
+students_df = pd.DataFrame(students_data45)
+
+# Convert 'date_of_admission' to datetime
+students_df["date_of_admission"] = pd.to_datetime(students_df["date_of_admission"])
+print(students_df)
+
+print(list(students_df.groupby(["course"])))
+for group in list(students_df.groupby(["course"])):
+    print(group[0])
+    print(group[1])
+    print("================================")
