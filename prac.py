@@ -85,6 +85,14 @@ students_data = [
         "date_of_admission": "2023-10-05",
         "fee": 19000,
     },
+       {
+        "roll_no": 12,
+        "name": "Jack",
+        "father": "Noah",
+        "course": "Art",
+        "date_of_admission": "2023-10-05",
+        "fee": 19000,
+    },
 ]
 
 # Create the DataFrame
